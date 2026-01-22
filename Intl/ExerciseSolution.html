@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * EXERCISE: Locale Detective
+         * 
+         * Your task: Complete the functions below to format data
+         * for different locales using the Intl API
+         */
+
+        // 1. Format a price in different currencies
+        function formatPrice(amount, locale, currency) {
+        const formattedPrice = new Intl.NumberFormat(locale,{style:'currency',currency:currency}).format(amount);
+        return formattedPrice;
+        // Example: formatPrice(99.99, 'en-US', 'USD') → "$99.99"
+        // Example: formatPrice(99.99, 'de-DE', 'EUR') → "99,99 €"
+        }
+
+        // 2. Format a date for different regions
+        function formatDate(dateString, locale) {
+            const date  = new Date(dateString);
+            const formattedDate = new Intl.DateTimeFormat(locale).format(date);
+            return formattedDate;
+        // Example: formatDate('2024-01-19', 'en-US') → "1/19/2024"
+        // Example: formatDate('2024-01-19', 'en-GB') → "19/01/2024"
+        // Example: formatDate('2024-01-19', 'fr-FR') → "19/01/2024"
+        }
+
+        // Test your solutions:
+        console.log('Test your functions with different locales!');
+        console.log(formatPrice(1000, 'ja-JP', 'JPY'));
+        console.log(formatDate('2024-01-19', 'en-US'));
+        console.log(formatDate('2024-01-19', 'en-GB'));
+    </script>
+</body>
+</html>

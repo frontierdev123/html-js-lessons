@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const date = new Date();
+        const locale = navigator.language;
+
+        // DateTimeFormat
+        // long -> short -> narrow
+        // Thursday -> Thu -> T
+        const options = {
+            weekday: 'long', 
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            timeZoneName:'longGeneric'
+        }
+
+        console.log(new Intl.DateTimeFormat(locale, options).format(date))
+        console.log(new Intl.DateTimeFormat('fr', options).format(date));
+        console.log(new Intl.DateTimeFormat('fr', {dateStyle:"full", timeStyle:"medium"}).format(date))
+        console.log(new Intl.DateTimeFormat('jp', {dateStyle:"full", timeStyle:"medium"}).format(date))
+
+
+        // NumberFormat - price, currency, unit
+        const numberOptions = {
+            style: 'currency',
+            currency:'USD',
+            minimumFractionDigits: 0,
+        }
+
+        console.log(new Intl.NumberFormat(locale, numberOptions).format(100));
+        console.log(new Intl.NumberFormat('de', {
+            style: 'currency',
+            currency:'EUR',
+            minimumFractionDigits: 0,
+        }).format(100));
+
+        console.log(new Intl.NumberFormat('de', {style: 'unit',unit:'meter', unitDisplay:'long'}).format(100));
+        console.log(new Intl.NumberFormat('en', {style: 'unit',unit:'meter',unitDisplay:'long'}).format(100));
+
+
+        // ListFormat
+        const items = ['apple','orange','banana'];
+        // 'and','or' -> 'conjunction', 'disjunction'
+
+        console.log(new Intl.ListFormat(locale,{type:"conjunction"}).format(items));
+        console.log(new Intl.ListFormat('de',{type:"conjunction"}).format(items));
+
+        console.log(new Intl.ListFormat(locale,{type:"disjunction"}).format(items));
+        console.log(new Intl.ListFormat('de',{type:"disjunction"}).format(items));
+
+        console.log("-----");
+        
+        //PluralRules
+        const prEn = new Intl.PluralRules('en',{type:'cardinal'}); // bag -> bags
+        console.log(prEn.select(0)) // tag
+        console.log(prEn.select(1)) 
+        console.log(prEn.select(2)) 
+
+         const prEnOrd = new Intl.PluralRules('en',{type:'ordinal'}); // bag -> bags
+        console.log(prEnOrd.select(0)) // tag
+        console.log(prEnOrd.select(1)) 
+        console.log(prEnOrd.select(2)) 
+
+    </script>
+</body>
+</html>
