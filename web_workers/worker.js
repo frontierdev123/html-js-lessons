@@ -7,16 +7,22 @@ function compute(num){
 };
 
 
-const messageQueue = [];
 self.onmessage = (event)=>{
-    // throw new Error('Some error occured')
-   console.log({event});
-   const result = compute(event.data);
-   self.postMessage(result);
+    // throw new Error();
+    const {data} = event;
+    const result = compute(data);
+    console.log(result);
+    self.postMessage(result);
 
-   // Minimize Communication Overhead With Message Batching 
-//    if(messageQueue.length > 10){
-//      self.postMessage(result);
-//      messageQueue = [];
-//    }
+    /* usage of Message Queue of optimisation
+
+    const result = computer(event.data);
+    messageQueue.push(result);
+
+    if(messageQueue.length > 0){
+    self.postMessage(messageQueue); 
+    messageQueue = [];
+    }
+
+    */
 }
