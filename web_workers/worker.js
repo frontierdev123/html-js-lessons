@@ -19,7 +19,7 @@ self.onmessage = (event)=>{
     const result = computer(event.data);
     messageQueue.push(result);
 
-    if(messageQueue.length > 0){
+    if(messageQueue.length > 10){
     self.postMessage(messageQueue); 
     messageQueue = [];
     }
